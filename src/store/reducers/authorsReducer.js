@@ -3,8 +3,7 @@ import { authorConstants } from '../constants/author.constants'
 const initialState = {    
     authors: [],
     author: {},
-    entry: [],
-    
+    entry: [],    
     error: false,
     errorMessage: '',
     isLoading: false,

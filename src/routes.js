@@ -3,17 +3,17 @@ import { Route, Switch } from "react-router-dom";
 
 import Home from './container/Home';
 
-import BlogsList from "./container/BlogsList";
-import BlogDetail from "./container/BlogDetail";
+import BlogsList from './container/BlogsList';
+import BlogDetail from './container/BlogDetail';
 
-import EntriesList from "./container/EntriesList";
-import EntryDetail from "./container/EntryDetail";
+import EntriesList from './container/EntriesList';
+import EntryDetail from './container/EntryDetail';
 
-import AuthorsList from "./container/AuthorsList";
-import AuthorDetail from "./container/AuthorDetail";
+import AuthorsList from './container/AuthorsList';
+import AuthorDetail from './container/AuthorDetail';
 
-import CommentsList from "./container/CommentsList";
-import CommentDetail from "./container/CommentDetail";
+import CommentsList from './container/CommentsList';
+import CommentDetail from './container/CommentDetail';
 
 import NotFound from './container/NotFound';
 

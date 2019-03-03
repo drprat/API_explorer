@@ -60,7 +60,6 @@ const entriesReducer = (state = initialState, action) => {
                 error: true,
                 errorMessage: action.error.message,
             }
-
         default:
             return state
     }
