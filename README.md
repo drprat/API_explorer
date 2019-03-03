@@ -1,2 +1,2 @@
 API_explorer for DRF_JSON example backend.
-React + Redux
+Front End: React + Redux
