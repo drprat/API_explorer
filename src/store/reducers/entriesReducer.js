@@ -25,6 +25,8 @@ const entriesReducer = (state = initialState, action) => {
                 entry: action.res.data,
                 headline: action.res.data.attributes.headline,
                 bodyText: action.res.data.attributes.bodyText,
+                pubDate: action.res.data.attributes.pubDate,
+                modDate: action.res.data.attributes.modDate,
                 included: action.res.included,
                 commentBody: action.res.included[2].attributes.body,
                 commentAuthorID: (action.res.included[2].relationships.author.data!==null) ? (action.res.included[2].relationships.author.data.id) : 'Unknown', 

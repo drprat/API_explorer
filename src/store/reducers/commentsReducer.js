@@ -23,7 +23,8 @@ const commentsReducer = (state = initialState, action) => {
                 error: false,
                 errorMessage: '',
                 comment: action.res.data,   
-                commentText: action.res.data.attributes.body,          
+                commentText: action.res.data.attributes.body,     
+                commentAuthId: (action.res.data.relationships.author.data!==null)?action.res.data.relationships.author.data.id : 'unknown',
                 isLoading: false,
             }
         case commentConstants.FETCH_COMMENT_FAIL:

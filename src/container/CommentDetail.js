@@ -8,6 +8,7 @@ import { fetchComment } from '../store/actions/commentsActions'
 const initialState = {
     comment: {},
     commentText: '',
+    commentAuthId: '',
     isLoading: false,
     error: false,
     errorMessage: '',
@@ -29,6 +30,7 @@ class CommentDetail extends React.Component {
         const { comments: {
             comment,
             commentText,
+            commentAuthId,
             isLoading,
             errorMessage,
         } } = this.props
@@ -37,9 +39,10 @@ class CommentDetail extends React.Component {
             <div><b style={{ color: 'orange' }}>{errorMessage}</b>
                 <Card size="default" title={("Comment detail")} loading={isLoading}>
                 <p><Link to="/comments">Comments </Link>/ Detail</p>
-                    <p>Comment <b>#{comment.id}</b> <br />
-                    Comment type: <b>{comment.type}</b><br />
-                    Comment Text: <b>{commentText}</b></p>
+                    <p>Comment <b>#{comment.id}</b> <br/>
+                    Comment type: <b>{comment.type}</b><br/>
+                    Comment Text: <b>{commentText}</b><br/>
+                    Comment Author ID:<b>{commentAuthId}</b></p>
                 </Card>
             </div>
         )

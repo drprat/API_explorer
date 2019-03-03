@@ -6,6 +6,7 @@ export function fetchAuthor(authorID) {
       try{
         dispatch(fetchingAuthor());
         const res = await axios.get(`http://127.0.0.1:8000/authors/${authorID}`);
+        console.log('author data',res.data);
         dispatch(fetchAuthorSuccess(res.data));
       } catch(err) {
         console.log('error from fetchAuthor: ', err);

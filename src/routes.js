@@ -34,6 +34,7 @@ const BaseRouter = () => (
 
     <Route exact path="/comments" component={CommentsList} />{" "}
     <Route exact path="/comments/:commentID" component={CommentDetail} />{" "}
+    <Route exact path="/comments/authors/:authorID" component={AuthorDetail} />{" "}
 
     <Route component={NotFound} />{" "}
     </Switch>

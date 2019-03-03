@@ -9,6 +9,8 @@ const initialState = {
     entry: {},
     headline: '',
     bodyText: '',
+    pubDate: '',
+    modDate: '',
     included: [],
     commentBody: '',
     commentAuthorID: '',
@@ -37,6 +39,8 @@ class EntryDetail extends React.Component {
             entry,
             headline,
             bodyText,
+            pubDate,
+            modDate,
             commentBody,
             commentAuthorID,
             authorName,
@@ -54,7 +58,9 @@ class EntryDetail extends React.Component {
                     <p>Entry <b>#{entry.id}</b> <br />
                         Entry type: <b>{entry.type}</b><br />
                         Headline: <b>{headline}</b><br />
-                        Body Text: <b>{bodyText}</b></p>
+                        Body Text: <b>{bodyText}</b><br />
+                        published: <b>{pubDate}</b><br />
+                        modified: <b>{modDate}</b></p>
 
                     <Card size="small" style={{ marginTop: 16 }} title="Comments">
                         <p>{commentBody}</p>
