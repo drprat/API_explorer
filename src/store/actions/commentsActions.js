@@ -2,21 +2,17 @@ import axios from 'axios';
 import { commentConstants } from '../constants/comment.constants'
 
 export function fetchComment(commentID) {
-  return (dispatch) => {
-    dispatch(fetchingComment())
-    console.log('commentID: ', commentID)
-    axios.get(`http://127.0.0.1:8000/comments/${commentID}`)
-      .then(res => {
-        console.log('res:', res.data)
-        dispatch(fetchCommentSuccess(res.data));
-      })
-      .catch(err => {
-        console.log('error from fetchComment: ', err)
-        dispatch(fetchCommentFail(err))
-      });
+  return async (dispatch) => {
+    try{
+      dispatch(fetchingComment());
+      const res = await axios.get(`http://127.0.0.1:8000/comments/${commentID}`);
+      dispatch(fetchCommentSuccess(res.data));
+    } catch(err) {
+      console.log('error from fetchComment: ', err)
+      dispatch(fetchCommentFail(err))
+    }
   }
 }
-
 export function fetchingComment() {
   return {
     type: commentConstants.FETCHING_COMMENT
@@ -38,16 +34,15 @@ export function fetchCommentFail(err) {
 }
 
 export function fetchComments() {
-  return (dispatch) => {
-    dispatch(fetchingComments())
-    axios.get(`http://127.0.0.1:8000/comments`)
-      .then(res => {
-        dispatch(fetchCommentsSuccess(res.data.data));
-      })
-      .catch(err => {
-        console.log('error from fetchComments: ', err)
-        dispatch(fetchCommentsFail(err))
-      });
+  return async (dispatch) => {
+    try{
+      dispatch(fetchingComments());
+      const res= await axios.get(`http://127.0.0.1:8000/comments`);
+      dispatch(fetchCommentsSuccess(res.data.data));
+    } catch(err) {
+      console.log('error from fetchComments: ', err);
+        dispatch(fetchCommentsFail(err));
+    }
   }
 }
 

@@ -30,7 +30,6 @@ class CommentDetail extends React.Component {
             comment,
             commentText,
             isLoading,
-            error,
             errorMessage,
         } } = this.props
 

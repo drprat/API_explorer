@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import 'antd/dist/antd.css';
-
 
 import BaseRouter from './routes';
 import BaseLayout from './container/Layout';

@@ -2,18 +2,15 @@ import axios from 'axios';
 import { authorConstants } from '../constants/author.constants'
 
 export function fetchAuthor(authorID) {
-    return (dispatch) => {
-      dispatch(fetchingAuthor())
-      console.log('authorID: ',authorID)
-        axios.get(`http://127.0.0.1:8000/authors/${authorID}`)
-        .then(res => {
-          console.log('res.data fetchauthor:', res.data)
-          dispatch(fetchAuthorSuccess(res.data));
-        })
-        .catch(err => {
-          console.log('error from fetchAuthor: ', err)
-          dispatch(fetchAuthorFail(err))
-        });
+    return async (dispatch) => {
+      try{
+        dispatch(fetchingAuthor());
+        const res = await axios.get(`http://127.0.0.1:8000/authors/${authorID}`);
+        dispatch(fetchAuthorSuccess(res.data));
+      } catch(err) {
+        console.log('error from fetchAuthor: ', err);
+        dispatch(fetchAuthorFail(err));
+      }
     }
   }
 
@@ -38,16 +35,15 @@ export function fetchAuthorFail(err){
   }
 
   export function fetchAuthors() {
-    return (dispatch) => {
-      dispatch(fetchingAuthors())
-      axios.get(`http://127.0.0.1:8000/authors`)
-        .then(res => {
-          dispatch(fetchAuthorsSuccess(res.data.data));
-        })
-        .catch(err => {
-          console.log('error from fetchAuthors: ', err)
-          dispatch(fetchAuthorsFail(err))
-        });
+    return async (dispatch) => {
+      try{
+        dispatch(fetchingAuthors())
+        const res = await axios.get(`http://127.0.0.1:8000/authors`)
+        dispatch(fetchAuthorsSuccess(res.data.data));
+      } catch(err) {
+        console.log('error from fetchAuthors: ', err)
+        dispatch(fetchAuthorsFail(err))
+      }
     }
   }
 

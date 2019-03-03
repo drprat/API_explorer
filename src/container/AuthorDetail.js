@@ -35,7 +35,6 @@ class AuthorDetail extends React.Component {
             email,
             entry,
             isLoading,
-            error,
             errorMessage,
         } } = this.props
 

@@ -37,14 +37,12 @@ class EntryDetail extends React.Component {
             entry,
             headline,
             bodyText,
-            included,
             commentBody,
             commentAuthorID,
             authorName,
             authorEmail,
             authorBioBody,
             isLoading,
-            error,
             errorMessage,
         } } = this.props
 

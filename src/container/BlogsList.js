@@ -1,7 +1,5 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { Spin } from 'antd';
 
 import Blogs from '../components/Blogs'
 import { fetchBlogs } from '../store/actions/blogsActions'
@@ -21,7 +19,7 @@ class BlogsList extends React.Component{
         this.state = initialState;
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         this.props.dispatchFetchBlogs();
         this.setState({pageLoading : false});
     }    
@@ -33,11 +31,9 @@ class BlogsList extends React.Component{
             errorMessage,
         } } = this.props
         return(
-            <div>
-                <Spin spinning={this.state.pageLoading}>
+            <div>       
                 <b style={{ color: 'orange' }}>{errorMessage}</b>
-                <Blogs loading={isLoading} data={blogs} />
-                </Spin>
+                <Blogs loading={isLoading} data={blogs} />               
             </div>
         )
     }

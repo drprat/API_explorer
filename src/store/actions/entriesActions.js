@@ -2,18 +2,15 @@ import axios from 'axios';
 import { entryConstants } from '../constants/entry.constants'
 
 export function fetchEntry(entryID) {
-  return (dispatch) => {
-    dispatch(fetchingEntry())
-    console.log('entryID: ', entryID)
-    axios.get(`http://127.0.0.1:8000/entries/${entryID}?include=authors,authors.bio,comments`)
-      .then(res => {
-        console.log('res:', res.data)
-        dispatch(fetchEntrySuccess(res.data));
-      })
-      .catch(err => {
-        console.log('error from fetchEntry: ', err)
+  return async (dispatch) => {
+    try{
+      dispatch(fetchingEntry());
+      const res = await axios.get(`http://127.0.0.1:8000/entries/${entryID}?include=authors,authors.bio,comments`)
+      dispatch(fetchEntrySuccess(res.data));
+    } catch (err){
+      console.log('error from fetchEntry: ', err)
         dispatch(fetchEntryFail(err))
-      });
+    }
   }
 }
 
@@ -38,16 +35,15 @@ export function fetchEntryFail(err) {
 }
 
 export function fetchEntries() {
-  return (dispatch) => {
-    dispatch(fetchingEntries())
-    axios.get(`http://127.0.0.1:8000/entries`)
-      .then(res => {
+  return async (dispatch) => {
+    try {
+        dispatch(fetchingEntries());
+        const res= await axios.get(`http://127.0.0.1:8000/entries`);     
         dispatch(fetchEntriesSuccess(res.data.data));
-      })
-      .catch(err => {
+      } catch (err){      
         console.log('error from fetchEntries: ', err)
-        dispatch(fetchEntriesFail(err))
-      });
+        dispatch(fetchEntriesFail(err)) 
+      }     
   }
 }
 

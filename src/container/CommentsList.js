@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 import Comments from '../components/Comments'
 import { fetchComments } from '../store/actions/commentsActions'
@@ -21,15 +20,6 @@ class CommentsList extends React.Component{
 
     componentDidMount(){
         this.props.dispatchFetchComments();
-
-        /* axios.get('http://127.0.0.1:8000/comments')
-        .then(res => {
-            this.setState({
-                comments: res.data.data
-            });
-            console.log('res.data',this.state.comments);
-        })
-        .catch(err => {console.log('error from CommentsList',err)}) */
     }
 
     render(){

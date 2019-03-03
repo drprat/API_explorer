@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card } from 'antd';
@@ -12,6 +11,7 @@ const initialState = {
     isLoading: false,
     error: false,
     errorMessage: '',
+    loader: true,
 }
 
 class BlogDetail extends React.Component {
@@ -21,9 +21,10 @@ class BlogDetail extends React.Component {
         this.state = initialState;
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const blogID = this.props.match.params.blogID;
         this.props.dispatchFetchBlog(blogID);
+        this.setState({loader: false})
     }
 
     render() {
@@ -31,13 +32,14 @@ class BlogDetail extends React.Component {
             blog,
             blogText,
             isLoading,
-            error,
             errorMessage,
         } } = this.props
 
         return (
+            
             <div><b style={{ color: 'orange' }}>{errorMessage}</b>
-                <Card size="default" title="Blog detail" loading={isLoading} >
+                 
+                 <Card size="default" title="Blog detail" loading={isLoading} >
 
                     <p><Link to="/blogs">Blogs </Link>/ Details</p>
 
@@ -45,6 +47,7 @@ class BlogDetail extends React.Component {
                         Type: <b>{blog.type}</b><br />
                         Attribute: <b>{blogText}</b></p>
                 </Card>
+                
             </div>
         )
     }

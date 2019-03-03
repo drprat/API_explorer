@@ -2,18 +2,15 @@ import axios from 'axios';
 import { blogConstants } from '../constants/blog.constants'
 
 export function fetchBlog(blogID) {
-  return (dispatch) => {
-    dispatch(fetchingBlog())
-    console.log('blogID: ', blogID)
-    axios.get(`http://127.0.0.1:8000/blogs/${blogID}`)
-      .then(res => {
-        console.log('res:', res.data)
-        dispatch(fetchBlogSuccess(res.data));
-      })
-      .catch(err => {
-        console.log('error from fetchBlog: ', err)
-        dispatch(fetchBlogFail(err))
-      });
+  return async (dispatch) => {
+    try{
+      dispatch(fetchingBlog());
+      const res = await axios.get(`http://127.0.0.1:8000/blogs/${blogID}`);
+      dispatch(fetchBlogSuccess(res.data));
+    } catch (err){
+      console.log('error from fetchBlog: ', err)
+      dispatch(fetchBlogFail(err))
+    }
   }
 }
 
@@ -38,16 +35,15 @@ export function fetchBlogFail(err) {
 }
 
 export function fetchBlogs() {
-  return (dispatch) => {
-    dispatch(fetchingBlogs())
-    axios.get(`http://127.0.0.1:8000/blogs`)
-      .then(res => {
-        dispatch(fetchBlogsSuccess(res.data.data));
-      })
-      .catch(err => {
-        console.log('error from fetchBlogs: ', err)
-        dispatch(fetchBlogsFail(err))
-      });
+  return async (dispatch) => {
+    try {
+      dispatch(fetchingBlogs());
+      const res = await axios.get(`http://127.0.0.1:8000/blogs`);
+      dispatch(fetchBlogsSuccess(res.data.data));
+    } catch (err){
+      console.log('error from fetchBlogs: ', err);
+        dispatch(fetchBlogsFail(err));
+    }    
   }
 }
 
