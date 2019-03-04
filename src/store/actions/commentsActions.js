@@ -3,13 +3,11 @@ import { commentConstants } from '../constants/comment.constants'
 import { fetchAuthor } from './authorsActions'
 import { fetchEntry } from './entriesActions'
 
-
 export function fetchComment(commentID) {
   return async (dispatch) => {
     try{
       dispatch(fetchingComment());
-      const res = await axios.get(`http://127.0.0.1:8000/comments/${commentID}`);
-      console.log('autor id:', res.data.data.relationships.author.data.id);
+      const res = await axios.get(`http://127.0.0.1:8000/comments/${commentID}`)
       dispatch(fetchAuthor(res.data.data.relationships.author.data.id));
       dispatch(fetchCommentSuccess(res.data));
     } catch(err) {
@@ -24,12 +22,11 @@ export function fetchCommentWithRelations(commentID) {
     try{
       dispatch(fetchingComment());
       const res = await axios.get(`http://127.0.0.1:8000/comments/${commentID}`);
-      console.log('autor id:', res.data.data.relationships.author.data.id);
       dispatch(fetchEntry(res.data.data.relationships.entry.data.id));
       dispatch(fetchAuthor(res.data.data.relationships.author.data.id));
       dispatch(fetchCommentSuccess(res.data));
     } catch(err) {
-      console.log('error from fetchComment: ', err)
+      console.log('error from fetchCommentWithRelations: ', err)
       dispatch(fetchCommentFail(err))
     }
   }

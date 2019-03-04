@@ -23,7 +23,7 @@ export function fetchAuthor(authorID) {
         dispatch(fetchEntry(res.data.data.relationships.entries.data[0].id));
         dispatch(fetchAuthorSuccess(res.data));
       } catch(err) {
-        console.log('error from fetchAuthor: ', err);
+        console.log('error from fetchAuthorWithEntry: ', err);
         dispatch(fetchAuthorFail(err));
       }
     }
