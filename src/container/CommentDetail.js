@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 
-import { fetchComment, fetchCommentWithRelations } from '../store/actions/commentsActions'
+import { fetchCommentWithRelations } from '../store/actions/commentsActions'
 
 const initialState = {
     comment: {},
@@ -25,7 +25,7 @@ class CommentDetail extends React.Component {
 
     componentDidMount() {
         const commentID = this.props.match.params.commentID;
-        this.props.dispatchFetchComment(commentID);
+        this.props.dispatchFetchCommentWithRelation(commentID);
     }
 
     render() {
@@ -38,7 +38,7 @@ class CommentDetail extends React.Component {
         } } = this.props
 
         const { entries: {
-            headline,bodyText,entry
+            headline,bodyText,pubDate,modDate
         } } = this.props
         
         const { authors: {
@@ -51,14 +51,19 @@ class CommentDetail extends React.Component {
                 <p><Link to="/comments">Comments </Link>/ Detail</p>
                     <p>Comment <b>#{comment.id}</b> <br/>
                     Comment type: <b>{comment.type}</b><br/>
-                    Comment Text: <b>{commentText}</b><br/>
-                    Author: <b>{name}</b><br/>
+                    Comment Text: <b>{commentText}</b></p>
+
+                    <Card size="small" title="Commented by" loading={isLoading} style={{ marginTop: 16 }}> 
+                    <p> Author: <b>{name}</b><br/>
                     Author Email: <b>{email}</b><br/>
                     Author ID:<b>{commentAuthId}</b></p>
+                    </Card>
 
-                    <Card size="small" title="Commented on Entry" loading={isLoading}> 
+                    <Card size="small" title="Commented on Entry" loading={isLoading} style={{ marginTop: 16 }}> 
                     <p>Headline: <b>#{headline}</b> <br/>
-                     Body Text: <b>{bodyText}</b></p>
+                     Body Text: <b>{bodyText}</b><br/>
+                     Pub Date: <b>{pubDate}</b><br/>
+                     Mod Date: <b>{modDate}</b><br/></p>
                     </Card>
                 </Card>
             </div>
@@ -67,7 +72,7 @@ class CommentDetail extends React.Component {
 }
 
 const mapDispatchToProps = {
-    dispatchFetchComment: (commentID) => fetchCommentWithRelations(commentID),
+    dispatchFetchCommentWithRelation: (commentID) => fetchCommentWithRelations(commentID),
 }
 
 const mapStateToProps = state => ({

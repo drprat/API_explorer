@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 
-import { fetchAuthor } from '../store/actions/authorsActions';
+import { fetchAuthorWithEntry } from '../store/actions/authorsActions';
 
 const initialState = {
     author: {},
@@ -28,7 +28,7 @@ class AuthorDetail extends React.Component {
 
     componentDidMount() {
         const authorID = this.props.match.params.authorID;
-        this.props.dispatchFetchAuthor(authorID);
+        this.props.dispatchFetchAuthorWithEntry(authorID);
     }
 
     render() {
@@ -72,7 +72,7 @@ class AuthorDetail extends React.Component {
 }
 
 const mapDispatchToProps = {
-    dispatchFetchAuthor: (authorID) => fetchAuthor(authorID),
+    dispatchFetchAuthorWithEntry: (authorID) => fetchAuthorWithEntry(authorID),
 }
 
 const mapStateToProps = state => ({

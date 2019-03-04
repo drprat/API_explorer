@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 
-import { fetchEntry } from '../store/actions/entriesActions';
+import { fetchEntryWithBlog } from '../store/actions/entriesActions';
 
 const initialState = {
     entry: {},
@@ -33,7 +33,7 @@ class EntryDetail extends React.Component {
 
     componentDidMount() {
         const entryID = this.props.match.params.entryID;
-        this.props.dispatchFetchEntry(entryID);
+        this.props.dispatchFetchEntryWithBlog(entryID);
     }
 
     render() {
@@ -92,7 +92,7 @@ class EntryDetail extends React.Component {
 }
 
 const mapDispatchToProps = {
-    dispatchFetchEntry: (entryID) => fetchEntry(entryID),
+    dispatchFetchEntryWithBlog: (entryID) => fetchEntryWithBlog(entryID),
 }
 
 const mapStateToProps = state => ({
