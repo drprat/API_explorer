@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { authorConstants } from '../constants/author.constants'
+import { fetchEntry } from './entriesActions'
 
 export function fetchAuthor(authorID) {
     return async (dispatch) => {
       try{
         dispatch(fetchingAuthor());
         const res = await axios.get(`http://127.0.0.1:8000/authors/${authorID}`);
-        console.log('author data',res.data);
+        dispatch(fetchEntry(res.data.data.relationships.entries.data[0].id));
         dispatch(fetchAuthorSuccess(res.data));
       } catch(err) {
         console.log('error from fetchAuthor: ', err);

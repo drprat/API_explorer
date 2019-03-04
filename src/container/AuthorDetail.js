@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'antd'
 import { Card } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -10,10 +9,14 @@ const initialState = {
     author: {},
     name: '',
     email: '',
-    entry: [],
+    entry: {},
     isLoading: false,
     error: false,
     errorMessage: '',
+    headline: '',
+    bodyText: '',
+    pubDate: '',
+    modDate: ''
 }
 
 class AuthorDetail extends React.Component {
@@ -33,9 +36,16 @@ class AuthorDetail extends React.Component {
             author,
             name,
             email,
-            entry,
             isLoading,
             errorMessage,
+        } } = this.props
+
+        const { entries: {            
+            entry,
+            headline,
+            bodyText,
+            pubDate,
+            modDate
         } } = this.props
 
         return (
@@ -44,26 +54,17 @@ class AuthorDetail extends React.Component {
                     <p><Link to="/authors">Authors </Link>/ Details</p>
                     <p>Author <b>#{author.id}</b> <br />
                         Name: <b>{name}</b><br />
-                        Email: <b>{email}</b></p>
+                        Email: <b>{email}</b><br />
+                        headline: <b>{headline}</b></p>                        
 
-                    <Table columns={[
-                        {
-                            title: 'Entry ID',
-                            dataIndex: 'id'
-                        },
-                        {
-                            title: 'Type', dataIndex: 'type'
-                        },
-                        {
-                            title: 'Action',
-                            dataIndex: 'id',
-                            key: 'id',
-                            render: text => (
-                                <span>
-                                    <a href={`entries/${text}`}>Entry details</a>
-                                </span>
-                            ),
-                        }]} dataSource={entry} />
+                    <Card size="small" style={{ marginTop: 16 }} title="Author's Entry">
+                    <p>Entry <b>#{entry.id}</b> <br />
+                        Entry type: <b>{entry.type}</b><br />
+                        Headline: <b>{headline}</b><br />
+                        Body Text: <b>{bodyText}</b><br />
+                        published: <b>{pubDate}</b><br />
+                        modified: <b>{modDate}</b></p>
+                    </Card>                    
                 </Card>
             </div>
         )
@@ -75,7 +76,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-    authors: state.authors
+    authors: state.authors,
+    entries: state.entries
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorDetail);

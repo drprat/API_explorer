@@ -12,6 +12,7 @@ const initialState = {
     isLoading: false,
     error: false,
     errorMessage: '',
+    name: '',
 }
 
 class CommentDetail extends React.Component {
@@ -34,6 +35,10 @@ class CommentDetail extends React.Component {
             isLoading,
             errorMessage,
         } } = this.props
+        
+        const { authors: {
+            name,email
+        } } = this.props
 
         return (
             <div><b style={{ color: 'orange' }}>{errorMessage}</b>
@@ -42,7 +47,9 @@ class CommentDetail extends React.Component {
                     <p>Comment <b>#{comment.id}</b> <br/>
                     Comment type: <b>{comment.type}</b><br/>
                     Comment Text: <b>{commentText}</b><br/>
-                    Comment Author ID:<b>{commentAuthId}</b></p>
+                    Author: <b>{name}</b><br/>
+                    Author Email: <b>{email}</b><br/>
+                    Author ID:<b>{commentAuthId}</b></p>
                 </Card>
             </div>
         )
@@ -54,7 +61,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-    comments: state.comments
+    comments: state.comments,
+    authors: state.authors
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentDetail);

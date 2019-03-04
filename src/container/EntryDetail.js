@@ -20,6 +20,8 @@ const initialState = {
     isLoading: false,
     error: false,
     errorMessage: '',
+    blog: {},
+    blogText: ''
 }
 
 class EntryDetail extends React.Component {
@@ -50,6 +52,11 @@ class EntryDetail extends React.Component {
             errorMessage,
         } } = this.props
 
+        const { blogs: {
+            blog,
+            blogText
+        } } = this.props
+
         return (
             <div><b style={{ color: 'orange' }}>{errorMessage}</b>
                 <Card size="default" title="Entry detail" loading={isLoading} >
@@ -62,15 +69,21 @@ class EntryDetail extends React.Component {
                         published: <b>{pubDate}</b><br />
                         modified: <b>{modDate}</b></p>
 
-                    <Card size="small" style={{ marginTop: 16 }} title="Comments">
-                        <p>{commentBody}</p>
-                        <p><b>author #</b>{commentAuthorID}</p>
+                    <Card size="small" style={{ marginTop: 16 }} title="Blog">
+                        <p><b>ID: </b>{blog.id}</p>
+                        <p><b>Type: </b>{blog.type}</p>
+                        <p><b>Attribute: </b>{blogText}</p>
                     </Card>
 
-                    <Card size="small" style={{ marginTop: 16 }} title="Authors">
+                    <Card size="small" style={{ marginTop: 16 }} title="Author">
                         <p><b>Name: </b>{authorName}</p>
                         <p><b>Email: </b>{authorEmail}</p>
                         <p><b>Bio: </b>{authorBioBody}</p>
+                    </Card>
+
+                    <Card size="small" style={{ marginTop: 16 }} title="Comment">
+                        <p>{commentBody}</p>
+                        <p><b>author #</b>{commentAuthorID}</p>
                     </Card>
                 </Card>
             </div>
@@ -83,7 +96,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-    entries: state.entries
+    entries: state.entries,
+    blogs: state.blogs
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EntryDetail);
