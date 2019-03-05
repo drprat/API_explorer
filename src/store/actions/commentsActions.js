@@ -7,8 +7,7 @@ export function fetchComment(commentID) {
   return async (dispatch) => {
     try{
       dispatch(fetchingComment());
-      const res = await axios.get(`http://127.0.0.1:8000/comments/${commentID}`)
-      dispatch(fetchAuthor(res.data.data.relationships.author.data.id));
+      const res = await axios.get(`http://127.0.0.1:8000/comments/${commentID}`);
       dispatch(fetchCommentSuccess(res.data));
     } catch(err) {
       console.log('error from fetchComment: ', err)
@@ -22,8 +21,8 @@ export function fetchCommentWithRelations(commentID) {
     try{
       dispatch(fetchingComment());
       const res = await axios.get(`http://127.0.0.1:8000/comments/${commentID}`);
-      dispatch(fetchEntry(res.data.data.relationships.entry.data.id));
-      dispatch(fetchAuthor(res.data.data.relationships.author.data.id));
+      dispatch(fetchEntry(res.data.data.relationships.entry.data.id)); //Fetch Entry from the entryID obtained from res
+      dispatch(fetchAuthor(res.data.data.relationships.author.data.id)); //Fetch Author from the authorID obtained from res
       dispatch(fetchCommentSuccess(res.data));
     } catch(err) {
       console.log('error from fetchCommentWithRelations: ', err)

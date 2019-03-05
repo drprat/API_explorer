@@ -20,7 +20,7 @@ export function fetchAuthor(authorID) {
       try{
         dispatch(fetchingAuthor());
         const res = await axios.get(`http://127.0.0.1:8000/authors/${authorID}`);
-        dispatch(fetchEntry(res.data.data.relationships.entries.data[0].id));
+        dispatch(fetchEntry(res.data.data.relationships.entries.data[0].id));//Fetch Entry from the entryID obtained from res
         dispatch(fetchAuthorSuccess(res.data));
       } catch(err) {
         console.log('error from fetchAuthorWithEntry: ', err);

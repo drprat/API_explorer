@@ -21,7 +21,7 @@ export function fetchEntryWithBlog(entryID) {
     try{
       dispatch(fetchingEntry());
       const res = await axios.get(`http://127.0.0.1:8000/entries/${entryID}?include=authors,authors.bio,comments`)
-      dispatch(fetchBlog(res.data.data.relationships.blog.data.id));
+      dispatch(fetchBlog(res.data.data.relationships.blog.data.id));//Fetch Blog from the blogID obtained from res
       dispatch(fetchEntrySuccess(res.data));
     } catch (err){
       console.log('error from fetchEntryWithBlog: ', err)
